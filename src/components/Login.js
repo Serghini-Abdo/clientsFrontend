@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +22,7 @@ const Login = () => {
     try {
       const res = await axios.post('https://clientsbackend.vercel.app/api/auth/login', body, config);
       console.log(res.data);
+      navigate("/");
     } catch (err) {
       console.error(err.response.data);
     }
